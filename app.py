@@ -4,13 +4,13 @@ import os
 
 app = Flask(__name__, static_folder='static', template_folder='templates')  # Set static and template folders
 
-# # Configure MySQL database connection (Uncomment and configure if needed)
-# db = mysql.connector.connect(
-#     host="pdcdbinstance.cfm06uw2grsj.us-east-2.rds.amazonaws.com",
-#     user="admin",
-#     password="Password1",
-#     database="donuts"
-# )
+# Configure MySQL database connection (Uncomment and configure if needed)
+db = mysql.connector.connect(
+    host="pythondonutsdb.c1qsomceyx8i.us-east-1.rds.amazonaws.com",
+    user="admin",
+    password="Password1",
+    database="donuts"
+)
 
 @app.route('/')
 def serve_index():
