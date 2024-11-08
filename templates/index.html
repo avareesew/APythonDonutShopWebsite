@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delightful Donuts</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <h1>Delightful Donuts</h1>
+      <p class="tagline">Indulge in sweet perfection!</p>
+    </header>
+
+    <nav id="category-buttons">
+      <button onclick="fetchDonuts('all')">All Donuts</button>
+      <button onclick="fetchDonuts('glazed')">Glazed Goodness</button>
+      <button onclick="fetchDonuts('filled')">Filled Delights</button>
+      <button onclick="fetchDonuts('other')">Specialty Treats</button>
+    </nav>
+
+    <main id="donut-list"></main>
+
+    <footer>
+      <p>&copy; 2024 Delightful Donuts. All rights reserved.</p>
+      <p>fictional donuts created with the help of Dall-E:)</p>
+    </footer>
+
+    <script src="app.py"></script>
+    <script>
+      function fetchDonuts(category) {
+        fetch(`/donuts?category=${category}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const donutList = document.getElementById("donut-list");
+            donutList.innerHTML = "";
+
+            data.forEach((donut) => {
+              const donutItem = document.createElement("div");
+              donutItem.className = "donut-item";
+
+              const donutImage = document.createElement("img");
+              donutImage.src = donut.image;
+              donutImage.alt = donut.name;
+              donutItem.appendChild(donutImage);
+
+              const donutName = document.createElement("h3");
+              donutName.textContent = donut.name;
+              donutItem.appendChild(donutName);
+
+              donutList.appendChild(donutItem);
+            });
+          })
+          .catch((error) => console.error("Error fetching donuts:", error));
+      }
+
+      // Load all donuts by default
+      fetchDonuts("all");
+    </script>
+  </body>
+</html>

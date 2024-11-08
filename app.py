@@ -1,20 +1,20 @@
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request, render_template
 import mysql.connector
 import os
 
-app = Flask(__name__, static_folder='public')  # Set up Flask and specify the static files directory
+app = Flask(__name__, static_folder='static', template_folder='templates')  # Set static and template folders
 
-# Configure MySQL database connection
-db = mysql.connector.connect(
-    host="pdcdbinstance.cfm06uw2grsj.us-east-2.rds.amazonaws.com",
-    user="admin",
-    password="Password1",
-    database="donuts"
-)
+# # Configure MySQL database connection (Uncomment and configure if needed)
+# db = mysql.connector.connect(
+#     host="pdcdbinstance.cfm06uw2grsj.us-east-2.rds.amazonaws.com",
+#     user="admin",
+#     password="Password1",
+#     database="donuts"
+# )
 
 @app.route('/')
 def serve_index():
-    return send_from_directory(app.static_folder, 'index.html')
+    return render_template('index.html')  # Render 'index.html' from the templates folder
 
 # Endpoint to fetch donuts based on category
 @app.route('/donuts', methods=['GET'])
@@ -36,4 +36,3 @@ def get_donuts():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=3000)
-
