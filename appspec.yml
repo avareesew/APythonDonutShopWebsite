@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 
-# copy all files from CodeCommit to app directory
+# Copy all files from CodeCommit to the app directory
 files:
   - source: /
     destination: /home/ec2-user/app
@@ -14,14 +14,14 @@ permissions:
 
 hooks:
   ApplicationStop:
-    - location: scripts/app_stop.sh
+    - location: /home/ec2-user/app/scripts/app_stop.sh
       timeout: 300
       runas: ec2-user
   AfterInstall:
-    - location: scripts/app_install.sh
+    - location: /home/ec2-user/app/scripts/app_install.sh
       timeout: 300
       runas: ec2-user
   ApplicationStart:
-    - location: scripts/app_start.sh
+    - location: /home/ec2-user/app/scripts/app_start.sh
       timeout: 300
       runas: ec2-user
