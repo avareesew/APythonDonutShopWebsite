@@ -15,3 +15,7 @@ source venv/bin/activate
 
 # Install necessary Python packages
 pip install -r requirements.txt
+
+# Make sure all scripts in the 'scripts' directory are executable
+chmod +x scripts/*.sh
+
