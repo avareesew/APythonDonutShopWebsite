@@ -6,9 +6,9 @@ app = Flask(__name__, static_folder='static', template_folder='templates')  # Se
 
 # Configure MySQL database connection (Uncomment and configure if needed)
 db = mysql.connector.connect(
-    host="pythondonutsdb.c1qsomceyx8i.us-east-1.rds.amazonaws.com",
+    host="database-donut.cxeueqyempri.us-east-2.rds.amazonaws.com",
     user="admin",
-    password="Password1",
+    password="Stuff123",
     database="donuts"
 )
 
